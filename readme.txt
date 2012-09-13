@@ -1,5 +1,5 @@
 === Auto Terms of Service and Privacy Policy ===
-Contributors: cliffpaulick 
+Contributors: cliffpaulick
 Tags: t&c, privacy, terms and conditions, legal, policy
 Requires at least: 3.0
 Tested up to: 3.4.2
@@ -49,15 +49,15 @@ Please rate the plugin, Tweet about it (mentioning @TourKick would be appreciate
 
 2. View of editing the plugin (using <a href=\"http://wordpress.org/extend/plugins/advanced-code-editor/\">Advanced Code Editor</a> plugin)
 
-3. Page/Post Editor screen, using this plugin\'s shortcode: [my_terms_of_service]
+3. Page/Post Editor screen, using this plugin's shortcode: [my_terms_of_service]
 
 4. Output of [my_terms_of_service] after customizing this plugin
 
-5. Page/Post Editor screen, using this plugin\'s shortcode: [my_privacy_policy]
+5. Page/Post Editor screen, using this plugin's shortcode: [my_privacy_policy]
 
 6. Output of [my_privacy_policy] after customizing this plugin
 
-7. Page/Post Editor screen, using this plugin\'s shortcode: [my_terms_of_service_and_privacy_policy]
+7. Page/Post Editor screen, using this plugin's shortcode: [my_terms_of_service_and_privacy_policy]
 
 8. Output of [my_terms_of_service_and_privacy_policy] after customizing this plugin. Creates in-page links for quick access.
 

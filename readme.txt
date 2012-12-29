@@ -2,7 +2,7 @@
 Contributors: cliffpaulick
 Tags: t&c, privacy, terms and conditions, legal, policy
 Requires at least: 3.0
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: /trunk/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,10 @@ See the plugin's file. Not much, really. This took way longer than I expected so
 How can I give back?
 
 Please rate the plugin, Tweet about it (mentioning @TourKick would be appreciated), contribute code enhancements, etc. I do not want monetary compensation for this particular project, but thank you for the thought.
+
+How do I add a "to the top" link?
+
+<a href="http://wordpress.org/extend/plugins/dynamic-to-top/" target="_blank">Dynamic "To Top" Plugin</a> is a good one that works site-wide, not just for this plugin. It might be a solution for you.
 == Screenshots ==
 1. Administrator view of shortcode output before plugin has been customized
 
@@ -62,3 +66,9 @@ Please rate the plugin, Tweet about it (mentioning @TourKick would be appreciate
 8. Output of [my_terms_of_service_and_privacy_policy] after customizing this plugin. Creates in-page links for quick access.
 
 9. Scroll or Click to Privacy Policy when using [my_terms_of_service_and_privacy_policy] shortcode, further down the same page as the previous screenshot. Separated by horizontal line.
+== Changelog ==
+= Version: 1.1.2012.12.28 =
+* Changed shortcodes to return instead of echo, to fix the shortcode display issue. Thanks to <a href="http://profiles.wordpress.org/birgire" target="_blank">birgire</a>.
+* Fixed link anchor text to use the name specified in the settings, to fix the issue of displaying hard coded "Terms of Use" and "Privacy Policy" anchor text in the table of contents for the [my_terms_of_service_and_privacy_policy] shortcode.
+= Version: 1.0.2012.09.12 =
+* Initial release.

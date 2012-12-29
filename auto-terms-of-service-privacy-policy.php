@@ -3,7 +3,7 @@
 Plugin Name: Auto Terms of Service and Privacy Policy
 Plugin URI: http://wordpress.org/extend/plugins/auto-terms-of-service-and-privacy-policy/
 Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>FYI: You need to edit the actual plugin file before using it</strong> (I know it's not perfect, feel free to contribute your code edits). Then you can add your own page and use one of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
-Version: 1.0.2012.09.12
+Version: 1.1.2012.12.28
 Author: Clifford Paulick of TourKick.com
 Author URI: http://twitter.com/TourKick
 License: GPL2 - http://codex.wordpress.org/Writing_a_Plugin#License
@@ -18,10 +18,9 @@ DISCLAIMER: I am not an attorney. I am not liable for any content, code, or othe
 */
 /*
 To-Do List:
-1) Why do the shortcodes display prior to all other WordPress content within the same post/page?
-2) Change so it uses DB or an external file instead of its own plugin file (so that automatic upgrades are possible).
-3) Should it be more MultiSite friendly so each site can have their own information? It doesn't currently break MultiSite, but it's not quite a MultiSite plugin.
-4) Add smartquotes / wptexturize? I tried but didn't get it to work.
+1) Change so it uses DB or an external file instead of its own plugin file (so that automatic upgrades are possible).
+2) Should it be more MultiSite friendly so each site can have their own information? It doesn't currently break MultiSite, but it's not quite a MultiSite plugin.
+3) Add smartquotes / wptexturize? I tried but didn't get it to work.
 */
 
 // plugin folder path
@@ -166,8 +165,8 @@ $tcpp_privacypolicy = "<h3>$tcpp_privacypolicyheading:</h3>
 
 $tcpp_combinedtermsandprivacy = "Contents:
 <ol>
-	<li><a href=#terms>Terms of Use</a></li>
-	<li><a href=#privacy>Privacy Policy</a></li>
+	<li><a href=#terms>$tcpp_termsheading</a></li>
+	<li><a href=#privacy>$tcpp_privacypolicyheading</a></li>
 </ol>
 <a name=\"terms\"></a>
 
@@ -193,13 +192,17 @@ function my_terms_of_service_and_privacy_policy_func() {
     global $tcpp_combinedtermsandprivacy;
 	global $tcpp_publish;
 	global $tcpp_linktoeditpluginfile;
-      if(!empty($tcpp_combinedtermsandprivacy) && $tcpp_publish == 1)
-		{ echo $tcpp_combinedtermsandprivacy; }
-	  elseif( is_multisite() && current_user_can('manage_network')) {
-		echo "Terms and Privacy Policy are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
-	  elseif( !is_multisite() && current_user_can('edit_plugins')) {
-		echo "Terms and Privacy Policy are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
-	  else { echo "Terms and Privacy Policy are coming soon.<br />"; }
+
+    $a = "";
+    if(!empty($tcpp_combinedtermsandprivacy) && $tcpp_publish == 1)
+		{ $a .= $tcpp_combinedtermsandprivacy; }
+	elseif( is_multisite() && current_user_can('manage_network')) {
+		$a .= "Terms and Privacy Policy are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
+	elseif( !is_multisite() && current_user_can('edit_plugins')) {
+		$a .= "Terms and Privacy Policy are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
+	else { $a .= "Terms and Privacy Policy are coming soon.<br />"; }
+
+	return $a;
 }
 add_shortcode('my_terms_of_service_and_privacy_policy', 'my_terms_of_service_and_privacy_policy_func');
 
@@ -208,28 +211,37 @@ function my_terms_of_service_func() {
     global $tcpp_tcond;
 	global $tcpp_publish;
 	global $tcpp_linktoeditpluginfile;
-      if(!empty($tcpp_tcond) && $tcpp_publish == 1)
-		{ echo $tcpp_tcond; }
-	  elseif( is_multisite() && current_user_can('manage_network')) {
-		echo "Terms are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
-	  elseif( !is_multisite() && current_user_can('edit_plugins')) {
-		echo "Terms are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
-	  else { echo "Terms coming soon.<br />"; }
+
+	$b = "";
+    if(!empty($tcpp_tcond) && $tcpp_publish == 1)
+		{ $b .= $tcpp_tcond; }
+	elseif( is_multisite() && current_user_can('manage_network')) {
+		$b .= "Terms are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
+	elseif( !is_multisite() && current_user_can('edit_plugins')) {
+		$b .= "Terms are coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
+	  else { $b .= "Terms coming soon.<br />"; }
+
+	return $b;
 }
 add_shortcode('my_terms_of_service', 'my_terms_of_service_func');
+
 
 // shortcode [my_privacy_policy]
 function my_privacy_policy_func() {
     global $tcpp_privacypolicy;
 	global $tcpp_publish;
 	global $tcpp_linktoeditpluginfile;
-      if(!empty($tcpp_privacypolicy) && $tcpp_publish == 1)
-		{ echo $tcpp_privacypolicy; }
-	  elseif( is_multisite() && current_user_can('manage_network')) {
-		echo "Privacy Policy coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
-	  elseif( !is_multisite() && current_user_can('edit_plugins')) {
-		echo "Privacy Policy coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
-	  else { echo "Privacy Policy coming soon.<br />"; }
+
+	$c = "";
+	if(!empty($tcpp_privacypolicy) && $tcpp_publish == 1)
+		{ $c .= $tcpp_privacypolicy; }
+	elseif( is_multisite() && current_user_can('manage_network')) {
+		$c .= "Privacy Policy coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
+	elseif( !is_multisite() && current_user_can('edit_plugins')) {
+		$c .= "Privacy Policy coming soon. <a href='$tcpp_linktoeditpluginfile'>Configure Plugin Settings Now (starting at Line 40)</a>.<br />"; }
+	else { $c .= "Privacy Policy coming soon.<br />"; }
+
+	return $c;
 }
 add_shortcode('my_privacy_policy', 'my_privacy_policy_func');
 

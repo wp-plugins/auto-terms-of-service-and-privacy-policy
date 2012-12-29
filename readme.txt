@@ -69,6 +69,8 @@ How do I add a "to the top" link?
 == Changelog ==
 * WARNING: If you modified the previous version of this (e.g. added your own business name and information), make sure you backup your information BEFORE UPDATING to a new version.
 * Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+= Version: 1.3.2012.12.29 =
+* Fixed 2 more hard-coded references to "WordPress" within that same paragraph. That should be all of them now.
 = Version: 1.2.2012.12.29 =
 * Fixed a <a href="http://wordpress.org/support/topic/update-required?replies=1#post-3439913" target="_blank">hard-coded reference to "WordPress"</a>, reported by kc22033. Thanks!
 * Checked WordPress' Terms of Service and Privacy Policy for updates, and there weren't any changes since this plugin's creation.

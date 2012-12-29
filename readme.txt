@@ -1,6 +1,6 @@
 === Auto Terms of Service and Privacy Policy ===
 Contributors: cliffpaulick
-Tags: t&c, privacy, terms and conditions, legal, policy
+Tags: legal, policy, privacy, t&c, terms and conditions
 Requires at least: 3.0
 Tested up to: 3.5
 Stable tag: /trunk/
@@ -68,8 +68,11 @@ How do I add a "to the top" link?
 9. Scroll or Click to Privacy Policy when using [my_terms_of_service_and_privacy_policy] shortcode, further down the same page as the previous screenshot. Separated by horizontal line.
 == Changelog ==
 * WARNING: If you modified the previous version of this (e.g. added your own business name and information), make sure you backup your information BEFORE UPDATING to a new version.
+* Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+= Version: 1.2.2012.12.29 =
+* Fixed a <a href="http://wordpress.org/support/topic/update-required?replies=1#post-3439913" target="_blank">hard-coded reference to "WordPress"</a>, reported by kc22033. Thanks!
+* Checked WordPress' Terms of Service and Privacy Policy for updates, and there weren't any changes since this plugin's creation.
 = Version: 1.1.2012.12.28 =
-* <a href="http://plugins.trac.wordpress.org/changeset?reponame=&new=645839%40auto-terms-of-service-and-privacy-policy%2Ftrunk%2Fauto-terms-of-service-privacy-policy.php&old=598366%40auto-terms-of-service-and-privacy-policy%2Ftrunk%2Fauto-terms-of-service-privacy-policy.php" target="_blank">PHP file DIFF</a>. <a href="http://plugins.trac.wordpress.org/changeset?reponame=&new=645840%40auto-terms-of-service-and-privacy-policy%2Ftrunk%2Freadme.txt&old=598396%40auto-terms-of-service-and-privacy-policy%2Ftrunk%2Freadme.txt" target="_blank">readme.txt file DIFF</a>.
 * Changed shortcodes to return instead of echo, to fix the shortcode display issue. Thanks to <a href="http://profiles.wordpress.org/birgire" target="_blank">birgire</a>.
 * Fixed link anchor text to use the name specified in the settings, to fix the issue of displaying hard coded "Terms of Use" and "Privacy Policy" anchor text in the table of contents for the [my_terms_of_service_and_privacy_policy] shortcode.
 = Version: 1.0.2012.09.12 =

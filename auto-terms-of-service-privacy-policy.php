@@ -3,7 +3,7 @@
 Plugin Name: Auto Terms of Service and Privacy Policy
 Plugin URI: http://wordpress.org/extend/plugins/auto-terms-of-service-and-privacy-policy/
 Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>Edit plugin's settings, then use one or more of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
-Version: 1.4.1
+Version: 1.4.2
 Author: TourKick (Clifford P)
 Author URI: http://twitter.com/TourKick
 License: GPL2 - http://codex.wordpress.org/Writing_a_Plugin#License
@@ -349,8 +349,8 @@ function my_terms_of_service_and_privacy_policy_func() {
 
 
 
-$tcpp_tcond = "<h3>$tcpp_termsheading:</h3>
-<p><a href='#atospp'>Back to top</a></p>
+$tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
+<p><a class='auto-tos-pp' href='#atospp'>Back to top</a></p>
 <p>The following terms and conditions govern all use of the $tcpp_domainname website and all content, services and products available at or through the website (taken together, the Website). The Website is owned and operated by $tcpp_biznamefull (&quot;$tcpp_bizname&quot;). The Website is offered subject to your acceptance without modification of all of the terms and conditions contained herein and all other operating rules, policies (including, without limitation, $tcpp_biznamepossessive $tcpp_privacypolicyheading) and procedures that may be published from time to time on this Site by $tcpp_bizname (collectively, the &quot;Agreement&quot;).</p>
 <p>Please read this Agreement carefully before accessing or using the Website. By accessing or using any part of the web site, you agree to become bound by the terms and conditions of this agreement. If you do not agree to all the terms and conditions of this agreement, then you may not access the Website or use any services. If these terms and conditions are considered an offer by $tcpp_bizname, acceptance is expressly limited to these terms. The Website is available only to individuals who are at least $tcpp_minimumage years old.</p>
 <ol>
@@ -401,8 +401,8 @@ Unless you notify $tcpp_bizname before the end of the applicable subscription pe
 <li><strong>Miscellaneous.</strong> This Agreement constitutes the entire agreement between $tcpp_bizname and you concerning the subject matter hereof, and they may only be modified by a written amendment signed by an authorized executive of $tcpp_bizname, or by the posting by $tcpp_bizname of a revised version. Except to the extent applicable law, if any, provides otherwise, this Agreement, any access to or use of the Website will be governed by the laws of the $tcpp_venue, excluding its conflict of law provisions, and the proper venue for any disputes arising out of or relating to any of the same will be the state and federal courts located in $tcpp_courtlocation. Except for claims for injunctive or equitable relief or claims regarding intellectual property rights (which may be brought in any competent court without the posting of a bond), any dispute arising under this Agreement shall be finally settled in accordance with the Comprehensive Arbitration Rules of the Judicial Arbitration and Mediation Service, Inc. (&quot;JAMS&quot;) by three arbitrators appointed in accordance with such Rules. The arbitration shall take place in $tcpp_arbitrationlocation, in the English language and the arbitral decision may be enforced in any court. The prevailing party in any action or proceeding to enforce this Agreement shall be entitled to costs and attorneys' fees. If any part of this Agreement is held invalid or unenforceable, that part will be construed to reflect the parties' original intent, and the remaining portions will remain in full force and effect. A waiver by either party of any term or condition of this Agreement or any breach thereof, in any one instance, will not waive such term or condition or any subsequent breach thereof. You may assign your rights under this Agreement to any party that consents to, and agrees to be bound by, its terms and conditions; $tcpp_bizname may assign its rights under this Agreement without condition. This Agreement will be binding upon and will inure to the benefit of the parties, their successors and permitted assigns.</li>
 </ol>";
 
-$tcpp_privacypolicy = "<h3>$tcpp_privacypolicyheading:</h3>
-<p><a href='#atospp'>Back to top</a></p>
+$tcpp_privacypolicy = "<h3 class='auto-tos-pp ppheading'>$tcpp_privacypolicyheading:</h3>
+<p><a class='auto-tos-pp' href='#atospp'>Back to top</a></p>
 <p>$tcpp_biznamefull (&quot;<strong>$tcpp_bizname</strong>&quot;) operates $tcpp_domainname and may operate other websites. It is $tcpp_biznamepossessive policy to respect your privacy regarding any information we may collect while operating our websites.</p>
 <h3>Website Visitors</h3>
 <p>Like most website operators, $tcpp_bizname collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. $tcpp_biznamepossessive purpose in collecting non-personally identifying information is to better understand how $tcpp_biznamepossessive visitors use its website. From time to time, $tcpp_bizname may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website.</p>
@@ -423,18 +423,18 @@ $tcpp_privacypolicy = "<h3>$tcpp_privacypolicyheading:</h3>
 <p>Although most changes are likely to be minor, $tcpp_bizname may change its $tcpp_privacypolicyheading from time to time, and in $tcpp_biznamepossessive sole discretion. $tcpp_bizname encourages visitors to frequently check this page for any changes to its $tcpp_privacypolicyheading. If you have a $tcpp_domainname account, you might also receive an alert informing you of these changes. Your continued use of this site after any change in this $tcpp_privacypolicyheading will constitute your acceptance of such change.</p>";
 
 
-$tcpp_combinedtermsandprivacy = "<a name='atospp'></a><h3>Contents:</h3>
-<ol>
+$tcpp_combinedtermsandprivacy = "<a name='atospp'></a><h3 class='auto-tos-pp tospptocheading'>Contents:</h3>
+<ol class='auto-tos-pp tospptoc'>
 	<li><a href=#terms>$tcpp_termsheading</a></li>
 	<li><a href=#privacy>$tcpp_privacypolicyheading</a></li>
 </ol>
 <a name=\"terms\"></a>
 
-<hr class='auto-tos-pp' />
+<hr class='auto-tos-pp tosppbeforetos' />
 $tcpp_tcond
 <a name=\"privacy\"></a>
 
-<hr />
+<hr class='auto-tos-pp tosppbeforepp' />
 $tcpp_privacypolicy";
 
 
@@ -514,7 +514,7 @@ function my_terms_of_service_func() {
 
 
 
-$tcpp_tcond = "<h3>$tcpp_termsheading:</h3>
+$tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
 <p>The following terms and conditions govern all use of the $tcpp_domainname website and all content, services and products available at or through the website (taken together, the Website). The Website is owned and operated by $tcpp_biznamefull (&quot;$tcpp_bizname&quot;). The Website is offered subject to your acceptance without modification of all of the terms and conditions contained herein and all other operating rules, policies (including, without limitation, $tcpp_biznamepossessive $tcpp_privacypolicyheading) and procedures that may be published from time to time on this Site by $tcpp_bizname (collectively, the &quot;Agreement&quot;).</p>
 <p>Please read this Agreement carefully before accessing or using the Website. By accessing or using any part of the web site, you agree to become bound by the terms and conditions of this agreement. If you do not agree to all the terms and conditions of this agreement, then you may not access the Website or use any services. If these terms and conditions are considered an offer by $tcpp_bizname, acceptance is expressly limited to these terms. The Website is available only to individuals who are at least $tcpp_minimumage years old.</p>
 <ol>
@@ -638,7 +638,7 @@ function my_privacy_policy_func() {
 
 
 
-$tcpp_privacypolicy = "<h3>$tcpp_privacypolicyheading:</h3>
+$tcpp_privacypolicy = "<h3 class='auto-tos-pp ppheading'>$tcpp_privacypolicyheading:</h3>
 <p>$tcpp_biznamefull (&quot;<strong>$tcpp_bizname</strong>&quot;) operates $tcpp_domainname and may operate other websites. It is $tcpp_biznamepossessive policy to respect your privacy regarding any information we may collect while operating our websites.</p>
 <h3>Website Visitors</h3>
 <p>Like most website operators, $tcpp_bizname collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. $tcpp_biznamepossessive purpose in collecting non-personally identifying information is to better understand how $tcpp_biznamepossessive visitors use its website. From time to time, $tcpp_bizname may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website.</p>

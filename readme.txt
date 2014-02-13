@@ -65,6 +65,9 @@ How do I add a "to the top" link?
 == Changelog ==
 * WARNING: All direct plugin file edits (required in versions prior to v1.4) will be lost and will need to be entered via the plugin's settings page. Make sure you backup your information BEFORE UPDATING to a new version.
 * Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+= Version 1.4.2 =
+* February 13, 2014
+* Added class='auto-tos-pp' (and additional classes) to main headings, horizontal lines, and Back to Top links -- could use .auto-tos-pp { display:none; } to not show things
 = Version 1.4.1 =
 * February 13, 2014
 * Updated plugin's description

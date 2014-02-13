@@ -44,11 +44,11 @@ class ATOSPP_Options{
 		$this->register_settings_and_fields();
 	}
 
-	public function add_menu_page(){
+	public static function add_menu_page(){
 		add_options_page('Auto TOS & PP Options', 'Auto TOS & PP', 'administrator', __FILE__, array('ATOSPP_Options', 'display_options_page'));
 	}
 
-	public function display_options_page(){
+	public static function display_options_page(){
 		?>
 
 		<div class="wrap">

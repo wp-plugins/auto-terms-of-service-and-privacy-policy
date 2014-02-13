@@ -2,8 +2,8 @@
 /*
 Plugin Name: Auto Terms of Service and Privacy Policy
 Plugin URI: http://wordpress.org/extend/plugins/auto-terms-of-service-and-privacy-policy/
-Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>FYI: You need to edit the actual plugin file before using it</strong> (I know it's not perfect, feel free to contribute your code edits). Then you can add your own page and use one of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
-Version: 1.4
+Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>Edit plugin's settings, then use one or more of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
+Version: 1.4.1
 Author: TourKick (Clifford P)
 Author URI: http://twitter.com/TourKick
 License: GPL2 - http://codex.wordpress.org/Writing_a_Plugin#License
@@ -439,16 +439,24 @@ $tcpp_privacypolicy";
 
 
 
+	$settingspage = admin_url('options-general.php?page=auto-terms-of-service-and-privacy-policy/auto-terms-of-service-privacy-policy.php');
+
     $a = "";
     if(!empty($tcpp_combinedtermsandprivacy) && $tcpp_publish == 'atospp_on')
 		{ $a .= $tcpp_combinedtermsandprivacy; }
 	elseif( current_user_can('edit_plugins') ) {
-		$a .= "Terms and Privacy Policy are coming soon. Please configure this plugin's settings.<br/>"; }
+		$a .= "Terms and Privacy Policy are coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br/>"; }
 	else { $a .= "Terms and Privacy Policy are coming soon.<br/>"; }
 
 	return $a;
 }
 add_shortcode('my_terms_of_service_and_privacy_policy', 'my_terms_of_service_and_privacy_policy_func');
+
+
+
+
+
+
 
 // shortcode [my_terms_of_service]
 function my_terms_of_service_func() {
@@ -558,11 +566,15 @@ Unless you notify $tcpp_bizname before the end of the applicable subscription pe
 </ol>";
 
 
+
+
+	$settingspage = admin_url('options-general.php?page=auto-terms-of-service-and-privacy-policy/auto-terms-of-service-privacy-policy.php');
+
 	$b = "";
     if(!empty($tcpp_tcond) && $tcpp_publish == 'atospp_on')
 		{ $b .= $tcpp_tcond; }
 	elseif( current_user_can('edit_plugins') ) {
-		$b .= "Terms are coming soon. Please configure this plugin's settings.<br/>"; }
+		$b .= "Terms are coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br/>"; }
 	  else { $b .= "Terms are coming soon.<br/>"; }
 
 	return $b;
@@ -649,11 +661,13 @@ $tcpp_privacypolicy = "<h3>$tcpp_privacypolicyheading:</h3>
 
 
 
+	$settingspage = admin_url('options-general.php?page=auto-terms-of-service-and-privacy-policy/auto-terms-of-service-privacy-policy.php');
+
 	$c = "";
 	if(!empty($tcpp_privacypolicy) && $tcpp_publish == 'atospp_on')
 		{ $c .= $tcpp_privacypolicy; }
 	elseif( current_user_can('edit_plugins') ) {
-		$c .= "Privacy Policy is coming soon. Please configure this plugin's settings.<br />"; }
+		$c .= "Privacy Policy is coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br />"; }
 	else { $c .= "Privacy Policy is coming soon.<br />"; }
 
 	return $c;

@@ -45,7 +45,7 @@ How do I add a "to the top" link?
 
 <a href="http://wordpress.org/extend/plugins/dynamic-to-top/" target="_blank">Dynamic "To Top" Plugin</a> is a good one that works site-wide, not just for this plugin. It might be a solution for you.
 == Screenshots ==
-1. Administrator view of shortcode output before plugin has been customized
+1. Administrator-only view of shortcode output before plugin has been customized or if On/Off setting is Off
 
 2. View of editing the plugin's settings
 
@@ -63,8 +63,12 @@ How do I add a "to the top" link?
 
 9. Scroll or Click to Privacy Policy when using [my_terms_of_service_and_privacy_policy] shortcode, further down the same page as the previous screenshot. Separated by horizontal line with class of "auto-tos-pp".
 == Changelog ==
-* WARNING: All direct plugin file edits (required in previous version) will be lost and will need to be entered via the plugin's settings page. Make sure you backup your information BEFORE UPDATING to a new version.
+* WARNING: All direct plugin file edits (required in versions prior to v1.4) will be lost and will need to be entered via the plugin's settings page. Make sure you backup your information BEFORE UPDATING to a new version.
 * Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+= Version 1.4.1 =
+* February 13, 2014
+* Updated plugin's description
+* Hyperlinked to plugin's settings page for shortcode output (when appropriate)
 = Version 1.4 =
 * February 12, 2014
 * Added plugin settings page so you don't have to edit the plugin's actual code.

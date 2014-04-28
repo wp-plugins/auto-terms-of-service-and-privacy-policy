@@ -31,7 +31,11 @@ Because Terms and Conditions and Privacy Policies are important to have and beca
 
 How?
 
-Edit the plugin's actual file, starting at Line 40, following the steps listed there.
+Go to the plugin's Settings page and complete all required fields. Then change shortcode output setting from Off to On and the shortcodes will work.
+
+Language other than English?
+
+As this plugin generates Terms of Service and Privacy Policy documents, which is worded specifically for the United States of America, I'd say it's not smart to translate the output text into another language. If you have a legal document in another language that you want to use (and have permission to use), just put its full text in a WordPress page and link to it where needed (i.e. put your full text in a page instead of using this plugin).
 
 MultiSite?
 
@@ -39,7 +43,7 @@ Kinda... It Network Activates but doesn't show up under each site's list of inta
 
 How can I give back?
 
-Please rate the plugin, Tweet about it (mentioning @TourKick would be appreciated), contribute code enhancements, etc. I do not want monetary compensation for this particular project, but thank you for the thought.
+Please rate the plugin, Tweet about it (mention @TourKick if you'd like to give me warm fuzzies), contribute code enhancements, etc. I do not want monetary compensation for this particular project, but thank you for the thought.
 
 How do I add a "to the top" link?
 

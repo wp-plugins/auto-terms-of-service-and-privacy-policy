@@ -15,9 +15,6 @@ Puts your own information into a version of Automattic's <a href="http://en.word
 
 <strong>Enter your organization's information in the plugin's settings page. Then you can add your own page and use one of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
 
-A video demo:
-[youtube http://www.youtube.com/watch?v=58rwQ_yDMfs]
-
 Disclaimer: <a href="http://tourkick.com/">Clifford Paulick of TourKick.com</a> is not an attorney. Additional disclaimer text within the plugin file(s).
 
 == Installation ==

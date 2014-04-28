@@ -3,7 +3,7 @@
 Plugin Name: Auto Terms of Service and Privacy Policy
 Plugin URI: http://wordpress.org/extend/plugins/auto-terms-of-service-and-privacy-policy/
 Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>Edit plugin's settings, then use one or more of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
-Version: 1.4.2
+Version: 1.4.3
 Author: TourKick (Clifford P)
 Author URI: http://twitter.com/TourKick
 License: GPL2 - http://codex.wordpress.org/Writing_a_Plugin#License
@@ -30,6 +30,17 @@ if(!defined('TCPP_PLUGIN_DIR')) {
 if(!defined('TCPP_PLUGIN_URL')) {
 	define('TCPP_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 }
+
+
+
+// Add settings link on plugin page from http://bavotasan.com/2009/a-settings-link-for-your-wordpress-plugins/
+function atospp_plugin_settings_link($links) {
+  $settings_link = '<a href="options-general.php?page=auto-terms-of-service-and-privacy-policy/auto-terms-of-service-privacy-policy.php">Settings</a>';
+  array_unshift($links, $settings_link);
+  return $links;
+}
+$plugin = plugin_basename(__FILE__);
+add_filter("plugin_action_links_$plugin", 'atospp_plugin_settings_link' );
 
 
 
@@ -73,7 +84,7 @@ class ATOSPP_Options{
 	public function register_settings_and_fields(){
 
 		register_setting('atospp_plugin_options', 'atospp_plugin_options');
-		add_settings_section('atospp_section', 'Settings', array($this, 'atospp_section_cb'), __FILE__);
+		add_settings_section('atospp_section', 'Settings<br/><br/><hr/><span style="font-size: 80%;">Available shortcodes:<ul><li>[my_terms_of_service_and_privacy_policy]</li><li> [my_terms_of_service]</li><li>[my_privacy_policy]</li></ul></span><hr/>', array($this, 'atospp_section_cb'), __FILE__);
 
 		add_settings_field('atospp_onoff', 'On/Off:<br/><small><span style="color:darkred;">Enter all your info below, then Turn On so shortcodes can work.</span><br/><span style="color:red;">Will not allow you to Turn On until you enter all required <span style="color:red;">(*)</span> fields.</span></small>', array($this, 'atospp_onoff_setting'), __FILE__, 'atospp_section');
 		add_settings_field('atospp_tos_heading', '<span style="color:red;">(*)</span> TOS Heading:<br/><small>e.g. Terms of Service, Terms of Use</small>', array($this, 'atospp_tos_heading_setting'), __FILE__, 'atospp_section');
@@ -139,7 +150,8 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_namepossessive'])){
 			$namepossessive = $this->options['atospp_namepossessive'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_namepossessive]' type='text' value='{$namepossessive}' />";
+		//" instead of ' because of apostrophe in possessive
+		echo '<input name="atospp_plugin_options[atospp_namepossessive]" type="text" value="'.$namepossessive.'" />';
 	}
 
 	public function atospp_domainname_setting(){

@@ -3,7 +3,7 @@
 Plugin Name: Auto Terms of Service and Privacy Policy
 Plugin URI: http://wordpress.org/extend/plugins/auto-terms-of-service-and-privacy-policy/
 Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>Edit plugin's settings, then use one or more of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
-Version: 1.4.3
+Version: 1.4.4
 Author: TourKick (Clifford P)
 Author URI: http://twitter.com/TourKick
 License: GPL2 - http://codex.wordpress.org/Writing_a_Plugin#License
@@ -20,6 +20,7 @@ DISCLAIMER: I am not an attorney. I am not liable for any content, code, or othe
 To-Do List:
 1) Should it be more MultiSite friendly so each site can have their own information? It doesn't currently break MultiSite, but it's not quite a MultiSite plugin.
 2) Add smartquotes / wptexturize? I tried but didn't get it to work.
+3) If changing filename (e.g. from auto-terms-of-service-privacy-policy.php to setup.php), will deactivate the plugin, which requires manual re-activation.
 */
 
 // plugin folder path
@@ -82,9 +83,25 @@ class ATOSPP_Options{
 	}
 
 	public function register_settings_and_fields(){
+		$tourkicklogo = plugins_url('images/tourkick-logo-square-300.png', __FILE__);
+		$tourkicklogo = str_replace('http:', '', $tourkicklogo); //protocol-relative to make sure it works if wp-admin is HTTPS
+		$tourkicklogo = sprintf('<a href="http://tourkick.com/" target="_blank"><img style="float: left; margin: 5px 40px 10px 10px;" width="100" height="100" src=\'%s\'></a>', $tourkicklogo);
+		$displaytop = '<div style="width: 80%; padding: 20px; margin: 20px; background-color: #fff;">';
+		$displaytop .= $tourkicklogo;
+		$displaytop .= '<h2><a href="https://wordpress.org/support/view/plugin-reviews/auto-terms-of-service-and-privacy-policy?rate=5#postform" target="_blank">Leave a Review</a>
+		<br><br>
+		<a href="https://wordpress.org/support/plugin/auto-terms-of-service-and-privacy-policy" target="_blank">Plugin Support and Feature Requests</a></h2>
+		<br>
+		<p>In the future, I plan to add additional features, including additional languages, ability to customize text, and to easily add a checkbox to signup forms.</p>
+		<p>Some new features may be free and some may be paid, either via a separate premium version or add-ons. Monetizing the plugin should fund further development and further improvement to both free and paid versions.</p>
+		<p>Please share your feedback (including feature requests) via one of the WordPress links, above.</p>
+		<br>
+		Find me online: <a href="https://twitter.com/intent/follow?screen_name=TourKick" target="_blank">Twitter</a> | <a href="https://www.facebook.com/TourKick" target="_blank">Facebook</a> | <a href="https://profiles.wordpress.org/cliffpaulick#content-plugins" target="_blank">WordPress Profile</a> | <a href="http://tourkick.com/" target="_blank">Website</a></p>
+		</div>';
+		$displaytop .= 'Settings<br/><br/><hr/><span style="font-size: 80%;">Available shortcodes:<ul><li>[my_terms_of_service_and_privacy_policy]</li><li> [my_terms_of_service]</li><li>[my_privacy_policy]</li></ul></span><hr/>';
 
 		register_setting('atospp_plugin_options', 'atospp_plugin_options');
-		add_settings_section('atospp_section', 'Settings<br/><br/><hr/><span style="font-size: 80%;">Available shortcodes:<ul><li>[my_terms_of_service_and_privacy_policy]</li><li> [my_terms_of_service]</li><li>[my_privacy_policy]</li></ul></span><hr/>', array($this, 'atospp_section_cb'), __FILE__);
+		add_settings_section('atospp_section', $displaytop, array($this, 'atospp_section_cb'), __FILE__);
 
 		add_settings_field('atospp_onoff', 'On/Off:<br/><small><span style="color:darkred;">Enter all your info below, then Turn On so shortcodes can work.</span><br/><span style="color:red;">Will not allow you to Turn On until you enter all required <span style="color:red;">(*)</span> fields.</span></small>', array($this, 'atospp_onoff_setting'), __FILE__, 'atospp_section');
 		add_settings_field('atospp_tos_heading', '<span style="color:red;">(*)</span> TOS Heading:<br/><small>e.g. Terms of Service, Terms of Use</small>', array($this, 'atospp_tos_heading_setting'), __FILE__, 'atospp_section');

@@ -3,7 +3,7 @@
 Plugin Name: Auto Terms of Service and Privacy Policy
 Plugin URI: http://wordpress.org/extend/plugins/auto-terms-of-service-and-privacy-policy/
 Description: Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others. <strong>Edit plugin's settings, then use one or more of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
-Version: 1.4.4
+Version: 1.5
 Author: TourKick (Clifford P)
 Author URI: http://twitter.com/TourKick
 License: GPL2 - http://codex.wordpress.org/Writing_a_Plugin#License
@@ -19,7 +19,7 @@ DISCLAIMER: I am not an attorney. I am not liable for any content, code, or othe
 /*
 To-Do List:
 1) Should it be more MultiSite friendly so each site can have their own information? It doesn't currently break MultiSite, but it's not quite a MultiSite plugin.
-2) Add smartquotes / wptexturize? I tried but didn't get it to work.
+2) Add smartquotes / wptexturize? I tried but didn't get it to work, maybe because of using HTML Entity &quot;
 3) If changing filename (e.g. from auto-terms-of-service-privacy-policy.php to setup.php), will deactivate the plugin, which requires manual re-activation.
 */
 
@@ -73,7 +73,7 @@ class ATOSPP_Options{
 				<?php do_settings_sections(__FILE__); ?>
 
 				<p class="submit">
-					<input name="submit" type="submit" class="button-primary" value="Save Changes" />
+					<input name="submit" type="submit" class="button-primary" value="Save Changes">
 				</p>
 			</form>
 
@@ -98,27 +98,27 @@ class ATOSPP_Options{
 		<br>
 		Find me online: <a href="https://twitter.com/intent/follow?screen_name=TourKick" target="_blank">Twitter</a> | <a href="https://www.facebook.com/TourKick" target="_blank">Facebook</a> | <a href="https://profiles.wordpress.org/cliffpaulick#content-plugins" target="_blank">WordPress Profile</a> | <a href="http://tourkick.com/" target="_blank">Website</a></p>
 		</div>';
-		$displaytop .= 'Settings<br/><br/><hr/><span style="font-size: 80%;">Available shortcodes:<ul><li>[my_terms_of_service_and_privacy_policy]</li><li> [my_terms_of_service]</li><li>[my_privacy_policy]</li></ul></span><hr/>';
+		$displaytop .= 'Settings<br><br><hr><span style="font-size: 80%;">Available shortcodes:<ul><li>[my_terms_of_service_and_privacy_policy]</li><li> [my_terms_of_service]</li><li>[my_privacy_policy]</li></ul></span><hr>';
 
 		register_setting('atospp_plugin_options', 'atospp_plugin_options');
 		add_settings_section('atospp_section', $displaytop, array($this, 'atospp_section_cb'), __FILE__);
 
-		add_settings_field('atospp_onoff', 'On/Off:<br/><small><span style="color:darkred;">Enter all your info below, then Turn On so shortcodes can work.</span><br/><span style="color:red;">Will not allow you to Turn On until you enter all required <span style="color:red;">(*)</span> fields.</span></small>', array($this, 'atospp_onoff_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_tos_heading', '<span style="color:red;">(*)</span> TOS Heading:<br/><small>e.g. Terms of Service, Terms of Use</small>', array($this, 'atospp_tos_heading_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_pp_heading', '<span style="color:red;">(*)</span> PP Heading:<br/><small>e.g. Privacy Policy</small>', array($this, 'atospp_pp_heading_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_namefull', '<span style="color:red;">(*)</span> Full Name:<br/><small>e.g. Automattic Inc.</small>', array($this, 'atospp_namefull_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_name', '<span style="color:red;">(*)</span> Name:<br/><small>e.g. Automattic</small>', array($this, 'atospp_name_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_namepossessive', '<span style="color:red;">(*)</span> Possessive Name:<br/><small>e.g. Automattic\'s</small>', array($this, 'atospp_namepossessive_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_domainname', '<span style="color:red;">(*)</span> Domain Name:<br/><small>e.g. Automattic.com</small>', array($this, 'atospp_domainname_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_websiteurl', '<span style="color:red;">(*)</span> Official Website URL:<br/><small>e.g. http://www.wordpress.com/</small>', array($this, 'atospp_websiteurl_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_minage', '<span style="color:red;">(*)</span> Minimum Age:<br/><small>e.g. 13</small>', array($this, 'atospp_minage_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_time_feesnotifications', '<span style="color:red;">(*)</span> Time Period for changing fees and for notifications:<br/><small>e.g. thirty (30) days</small>', array($this, 'atospp_time_feesnotifications_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_time_replytopriorityemail', '<span style="color:red;">(*)</span> Time Period for replying to priority email:<br/><small>e.g. one business day</small>', array($this, 'atospp_time_replytopriorityemail_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_time_determiningmaxdamages', '<span style="color:red;">(*)</span> Time Period for determining maximum damages:<br/><small>e.g. twelve (12) month<br/><span style="color:darkred;">Notice no "S" on "month"</span></small>', array($this, 'atospp_time_determiningmaxdamages_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_dmcanoticeurl', 'DMCA Notice URL:<br/><small>e.g. http://automattic.com/dmca-notice/<br/><span style="color:darkred;">If left blank, sentence about reporting DMCA violations will be shown but not hyperlinked.</span></small>', array($this, 'atospp_dmcanoticeurl_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_venue', '<span style="color:red;">(*)</span> Venue:<br/><small>e.g. state of California, U.S.A.</small>', array($this, 'atospp_venue_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_courtlocation', '<span style="color:red;">(*)</span> Court Location:<br/><small>e.g. San Francisco County, California</small>', array($this, 'atospp_courtlocation_setting'), __FILE__, 'atospp_section');
-		add_settings_field('atospp_arbitrationlocation', '<span style="color:red;">(*)</span> Arbitration Location:<br/><small>e.g. San Francisco, California</small>', array($this, 'atospp_arbitrationlocation_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_onoff', 'On/Off:<br><small><span style="color:darkred;">Enter all your info below, then Turn On so shortcodes can work.</span><br><span style="color:red;">Will not allow you to Turn On until you enter all required <span style="color:red;">(*)</span> fields.</span></small>', array($this, 'atospp_onoff_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_tos_heading', '<span style="color:red;">(*)</span> TOS Heading:<br><small>e.g. Terms of Service, Terms of Use</small>', array($this, 'atospp_tos_heading_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_pp_heading', '<span style="color:red;">(*)</span> PP Heading:<br><small>e.g. Privacy Policy</small>', array($this, 'atospp_pp_heading_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_namefull', '<span style="color:red;">(*)</span> Full Name:<br><small>e.g. Automattic Inc.</small>', array($this, 'atospp_namefull_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_name', '<span style="color:red;">(*)</span> Name:<br><small>e.g. Automattic</small>', array($this, 'atospp_name_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_namepossessive', '<span style="color:red;">(*)</span> Possessive Name:<br><small>e.g. Automattic\'s</small>', array($this, 'atospp_namepossessive_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_domainname', '<span style="color:red;">(*)</span> Domain Name:<br><small>e.g. Automattic.com</small>', array($this, 'atospp_domainname_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_websiteurl', '<span style="color:red;">(*)</span> Official Website URL:<br><small>e.g. http://www.wordpress.com/</small>', array($this, 'atospp_websiteurl_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_minage', '<span style="color:red;">(*)</span> Minimum Age:<br><small>e.g. 13</small>', array($this, 'atospp_minage_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_time_feesnotifications', '<span style="color:red;">(*)</span> Time Period for changing fees and for notifications:<br><small>e.g. thirty (30) days</small>', array($this, 'atospp_time_feesnotifications_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_time_replytopriorityemail', '<span style="color:red;">(*)</span> Time Period for replying to priority email:<br><small>e.g. one business day</small>', array($this, 'atospp_time_replytopriorityemail_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_time_determiningmaxdamages', '<span style="color:red;">(*)</span> Time Period for determining maximum damages:<br><small>e.g. twelve (12) month<br><span style="color:darkred;">Notice no "S" on "month"</span></small>', array($this, 'atospp_time_determiningmaxdamages_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_dmcanoticeurl', 'DMCA Notice URL:<br><small>e.g. http://automattic.com/dmca-notice/<br><span style="color:darkred;">If left blank, sentence about reporting DMCA violations will be shown but not hyperlinked.</span></small>', array($this, 'atospp_dmcanoticeurl_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_venue', '<span style="color:red;">(*)</span> Venue:<br><small>e.g. state of California, U.S.A.</small>', array($this, 'atospp_venue_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_courtlocation', '<span style="color:red;">(*)</span> Court Location:<br><small>e.g. San Francisco County, California</small>', array($this, 'atospp_courtlocation_setting'), __FILE__, 'atospp_section');
+		add_settings_field('atospp_arbitrationlocation', '<span style="color:red;">(*)</span> Arbitration Location:<br><small>e.g. San Francisco, California</small>', array($this, 'atospp_arbitrationlocation_setting'), __FILE__, 'atospp_section');
 
 	}
 
@@ -135,7 +135,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_tos_heading'])){
 			$tos_heading = $this->options['atospp_tos_heading'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_tos_heading]' type='text' value='{$tos_heading}' />";
+		echo "<input name='atospp_plugin_options[atospp_tos_heading]' type='text' value='{$tos_heading}'>";
 	}
 
 	public function atospp_pp_heading_setting(){
@@ -143,7 +143,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_pp_heading'])){
 			$pp_heading = $this->options['atospp_pp_heading'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_pp_heading]' type='text' value='{$pp_heading}' />";
+		echo "<input name='atospp_plugin_options[atospp_pp_heading]' type='text' value='{$pp_heading}'>";
 	}
 
 	public function atospp_namefull_setting(){
@@ -151,7 +151,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_namefull'])){
 			$namefull = $this->options['atospp_namefull'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_namefull]' type='text' value='{$namefull}' />";
+		echo "<input name='atospp_plugin_options[atospp_namefull]' type='text' value='{$namefull}'>";
 	}
 
 	public function atospp_name_setting(){
@@ -159,7 +159,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_name'])){
 			$name = $this->options['atospp_name'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_name]' type='text' value='{$name}' />";
+		echo "<input name='atospp_plugin_options[atospp_name]' type='text' value='{$name}'>";
 	}
 
 	public function atospp_namepossessive_setting(){
@@ -168,7 +168,7 @@ class ATOSPP_Options{
 			$namepossessive = $this->options['atospp_namepossessive'];
 		}
 		//" instead of ' because of apostrophe in possessive
-		echo '<input name="atospp_plugin_options[atospp_namepossessive]" type="text" value="'.$namepossessive.'" />';
+		echo '<input name="atospp_plugin_options[atospp_namepossessive]" type="text" value="'.$namepossessive.'">';
 	}
 
 	public function atospp_domainname_setting(){
@@ -176,7 +176,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_domainname'])){
 			$domainname = $this->options['atospp_domainname'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_domainname]' type='text' value='{$domainname}' />";
+		echo "<input name='atospp_plugin_options[atospp_domainname]' type='text' value='{$domainname}'>";
 	}
 
 	public function atospp_websiteurl_setting(){
@@ -184,7 +184,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_websiteurl'])){
 			$websiteurl = $this->options['atospp_websiteurl'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_websiteurl]' type='text' value='{$websiteurl}' />";
+		echo "<input name='atospp_plugin_options[atospp_websiteurl]' type='text' value='{$websiteurl}'>";
 	}
 
 	public function atospp_minage_setting(){
@@ -192,7 +192,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_minage'])){
 			$minage = $this->options['atospp_minage'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_minage]' type='text' value='{$minage}' />";
+		echo "<input name='atospp_plugin_options[atospp_minage]' type='text' value='{$minage}'>";
 	}
 
 	public function atospp_time_feesnotifications_setting(){
@@ -200,7 +200,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_time_feesnotifications'])){
 			$timefeesnotifications = $this->options['atospp_time_feesnotifications'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_time_feesnotifications]' type='text' value='{$timefeesnotifications}' />";
+		echo "<input name='atospp_plugin_options[atospp_time_feesnotifications]' type='text' value='{$timefeesnotifications}'>";
 	}
 
 	public function atospp_time_replytopriorityemail_setting(){
@@ -208,7 +208,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_time_replytopriorityemail'])){
 			$timereplytopriorityemail = $this->options['atospp_time_replytopriorityemail'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_time_replytopriorityemail]' type='text' value='{$timereplytopriorityemail}' />";
+		echo "<input name='atospp_plugin_options[atospp_time_replytopriorityemail]' type='text' value='{$timereplytopriorityemail}'>";
 	}
 
 	public function atospp_time_determiningmaxdamages_setting(){
@@ -216,7 +216,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_time_determiningmaxdamages'])){
 			$timedeterminingmaxdamages = $this->options['atospp_time_determiningmaxdamages'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_time_determiningmaxdamages]' type='text' value='{$timedeterminingmaxdamages}' />";
+		echo "<input name='atospp_plugin_options[atospp_time_determiningmaxdamages]' type='text' value='{$timedeterminingmaxdamages}'>";
 	}
 
 	public function atospp_dmcanoticeurl_setting(){
@@ -224,7 +224,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_dmcanoticeurl'])){
 			$dmcanoticeurl = $this->options['atospp_dmcanoticeurl'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_dmcanoticeurl]' type='text' value='{$dmcanoticeurl}' />";
+		echo "<input name='atospp_plugin_options[atospp_dmcanoticeurl]' type='text' value='{$dmcanoticeurl}'>";
 	}
 
 	public function atospp_venue_setting(){
@@ -232,7 +232,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_venue'])){
 			$venue = $this->options['atospp_venue'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_venue]' type='text' value='{$venue}' />";
+		echo "<input name='atospp_plugin_options[atospp_venue]' type='text' value='{$venue}'>";
 	}
 
 	public function atospp_courtlocation_setting(){
@@ -240,7 +240,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_courtlocation'])){
 			$courtlocation = $this->options['atospp_courtlocation'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_courtlocation]' type='text' value='{$courtlocation}' />";
+		echo "<input name='atospp_plugin_options[atospp_courtlocation]' type='text' value='{$courtlocation}'>";
 	}
 
 	public function atospp_arbitrationlocation_setting(){
@@ -248,7 +248,7 @@ class ATOSPP_Options{
 		if(!empty($this->options['atospp_arbitrationlocation'])){
 			$arbitrationlocation = $this->options['atospp_arbitrationlocation'];
 		}
-		echo "<input name='atospp_plugin_options[atospp_arbitrationlocation]' type='text' value='{$arbitrationlocation}' />";
+		echo "<input name='atospp_plugin_options[atospp_arbitrationlocation]' type='text' value='{$arbitrationlocation}'>";
 	}
 
 
@@ -378,8 +378,8 @@ function my_terms_of_service_and_privacy_policy_func() {
 
 
 
-$tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
-<p><a class='auto-tos-pp' href='#atospp'>Back to top</a></p>
+$tcpp_tcond = "<h3 id='atospp-terms' class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
+<p><a class='auto-tos-pp' href='#atospp-toc'>Back to top</a></p>
 <p>The following terms and conditions govern all use of the $tcpp_domainname website and all content, services and products available at or through the website (taken together, the Website). The Website is owned and operated by $tcpp_biznamefull (&quot;$tcpp_bizname&quot;). The Website is offered subject to your acceptance without modification of all of the terms and conditions contained herein and all other operating rules, policies (including, without limitation, $tcpp_biznamepossessive $tcpp_privacypolicyheading) and procedures that may be published from time to time on this Site by $tcpp_bizname (collectively, the &quot;Agreement&quot;).</p>
 <p>Please read this Agreement carefully before accessing or using the Website. By accessing or using any part of the web site, you agree to become bound by the terms and conditions of this agreement. If you do not agree to all the terms and conditions of this agreement, then you may not access the Website or use any services. If these terms and conditions are considered an offer by $tcpp_bizname, acceptance is expressly limited to these terms. The Website is available only to individuals who are at least $tcpp_minimumage years old.</p>
 <ol>
@@ -390,7 +390,7 @@ $tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
 <li>if your employer has rights to intellectual property you create, you have either (i) received permission from your employer to post or make available the Content, including but not limited to any software, or (ii) secured from your employer a waiver as to all rights in or to the Content;</li>
 <li>you have fully complied with any third-party licenses relating to the Content, and have done all things necessary to successfully pass through to end users any required terms;</li>
 <li>the Content does not contain or install any viruses, worms, malware, Trojan horses or other harmful or destructive content;</li>
-<li class=&quot;important&quot;>the Content is not spam, is not machine- or randomly-generated, and does not contain unethical or unwanted commercial content designed to drive traffic to third party sites or boost the search engine rankings of third party sites, or to further unlawful acts (such as phishing) or mislead recipients as to the source of the material (such as spoofing);</li>
+<li class='important'>the Content is not spam, is not machine- or randomly-generated, and does not contain unethical or unwanted commercial content designed to drive traffic to third party sites or boost the search engine rankings of third party sites, or to further unlawful acts (such as phishing) or mislead recipients as to the source of the material (such as spoofing);</li>
 <li>the Content is not pornographic, does not contain threats or incite violence towards individuals or entities, and does not violate the privacy or publicity rights of any third party;</li>
 <li>your blog is not getting advertised via unwanted electronic messages such as spam links on newsgroups, email lists, other blogs and web sites, and similar unsolicited promotional methods;</li>
 <li>your blog is not named in a manner that misleads your readers into thinking that you are another person or company. For example, your blog's URL or name is not the name of a person other than yourself or company other than your own; and</li>
@@ -400,13 +400,13 @@ $tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
 <p>Without limiting any of those representations or warranties, $tcpp_bizname has the right (though not the obligation) to, in $tcpp_biznamepossessive sole discretion (i) refuse or remove any content that, in $tcpp_biznamepossessive reasonable opinion, violates any $tcpp_bizname policy or is in any way harmful or objectionable, or (ii) terminate or deny access to and use of the Website to any individual or entity for any reason, in $tcpp_biznamepossessive sole discretion. $tcpp_bizname will have no obligation to provide a refund of any amounts previously paid.</li>
 <li><strong>Payment and Renewal.</strong>
 <ul>
-<li><strong>General Terms.</strong><br />
+<li><strong>General Terms.</strong><br>
   By selecting a product or service, you agree to pay $tcpp_bizname the one-time and/or monthly or annual subscription fees indicated  (additional payment terms may be included in other communications). Subscription payments will be charged on a pre-pay basis on the day you sign up for an Upgrade and will cover the use of that service for a monthly or annual subscription period as indicated. Payments are not refundable.</li>
-<li><strong>Automatic Renewal. </strong><br />
+<li><strong>Automatic Renewal. </strong><br>
 Unless you notify $tcpp_bizname before the end of the applicable subscription period that you want to cancel a subscription, your  subscription will automatically renew and you authorize us to collect the then-applicable annual or monthly subscription fee for such subscription (as well as any taxes) using any credit card or other payment mechanism we have on record for you. Upgrades can be canceled at any time by submitting your request to $tcpp_bizname in writing.</li>
 </ul>
 </li>
-<li><strong>Services.</strong></li>
+<li><strong>Services.</strong>
 <ul>
 <li><strong>Fees; Payment. </strong>By signing up for a Services account you agree to pay $tcpp_bizname the applicable setup fees and recurring fees. Applicable fees will be invoiced starting from the day your services are established and in advance of using such services. $tcpp_bizname reserves the right to change the payment terms and fees upon $tcpp_timeperiodforchangingfeesandfornotifications prior written notice to you. Services can be canceled by you at anytime on $tcpp_timeperiodforchangingfeesandfornotifications written notice to $tcpp_bizname.</li>
 <li><strong>Support.</strong> If your service includes access to priority email support. &quot;Email support&quot; means the ability to make requests for technical support assistance by email at any time (with reasonable efforts by $tcpp_bizname to respond within $tcpp_timeperiodtoreplytopriorityemail) concerning the use of the VIP Services. &quot;Priority&quot; means that support takes priority over support for users of the standard or free $tcpp_domainname services. All support will be provided in accordance with $tcpp_bizname standard services practices, procedures and policies.</li>
@@ -419,19 +419,19 @@ Unless you notify $tcpp_bizname before the end of the applicable subscription pe
 <li><strong>Attribution.</strong> $tcpp_bizname reserves the right to display attribution links such as 'Blog at $tcpp_domainname,' theme author, and font attribution in your blog footer or toolbar.</li>
 <li><strong>Partner Products.</strong> By activating a partner product (e.g. theme) from one of our partners, you agree to that partner's terms of service. You can opt out of their terms of service at any time by de-activating the partner product.</li>
 <li><strong>Domain Names.</strong> If you are registering a domain name, using or transferring a previously registered domain name, you acknowledge and agree that use of the domain name is also subject to the policies of the Internet Corporation for Assigned Names and Numbers (&quot;ICANN&quot;), including their <a href=\"http://www.icann.org/en/registrars/registrant-rights-responsibilities-en.htm\">Registration Rights and Responsibilities</a>.</li>
-<li><strong>Changes. </strong>$tcpp_bizname reserves the right, at its sole discretion, to modify or replace any part of this Agreement. It is your responsibility to check this Agreement periodically for changes. Your continued use of or access to the Website following the posting of any changes to this Agreement constitutes acceptance of those changes. $tcpp_bizname may also, in the future, offer new services and/or features through the Website (including, the release of new tools and resources). Such new features and/or services shall be subject to the terms and conditions of this Agreement. <strong><br />
+<li><strong>Changes. </strong>$tcpp_bizname reserves the right, at its sole discretion, to modify or replace any part of this Agreement. It is your responsibility to check this Agreement periodically for changes. Your continued use of or access to the Website following the posting of any changes to this Agreement constitutes acceptance of those changes. $tcpp_bizname may also, in the future, offer new services and/or features through the Website (including, the release of new tools and resources). Such new features and/or services shall be subject to the terms and conditions of this Agreement. <strong><br>
 </strong></li>
-<li><strong>Termination. </strong>$tcpp_bizname may terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately. If you wish to terminate this Agreement or your $tcpp_domainname account (if you have one), you may simply discontinue using the Website. Notwithstanding the foregoing, if you have a paid services account, such account can only be terminated by $tcpp_bizname if you materially breach this Agreement and fail to cure such breach within $tcpp_timeperiodforchangingfeesandfornotifications from $tcpp_biznamepossessive notice to you thereof; provided that, $tcpp_bizname can terminate the Website immediately as part of a general shut down of our service. All provisions of this Agreement which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability. <strong><br />
+<li><strong>Termination. </strong>$tcpp_bizname may terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately. If you wish to terminate this Agreement or your $tcpp_domainname account (if you have one), you may simply discontinue using the Website. Notwithstanding the foregoing, if you have a paid services account, such account can only be terminated by $tcpp_bizname if you materially breach this Agreement and fail to cure such breach within $tcpp_timeperiodforchangingfeesandfornotifications from $tcpp_biznamepossessive notice to you thereof; provided that, $tcpp_bizname can terminate the Website immediately as part of a general shut down of our service. All provisions of this Agreement which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability. <strong><br>
 </strong></li>
-<li class=&quot;important&quot;><strong>Disclaimer of Warranties.</strong> The Website is provided &quot;as is&quot;. $tcpp_bizname and its suppliers and licensors hereby disclaim all warranties of any kind, express or implied, including, without limitation, the warranties of merchantability, fitness for a particular purpose and non-infringement. Neither $tcpp_bizname nor its suppliers and licensors, makes any warranty that the Website will be error free or that access thereto will be continuous or uninterrupted. You understand that you download from, or otherwise obtain content or services through, the Website at your own discretion and risk.</li>
-<li class=&quot;important&quot;><strong>Limitation of Liability.</strong> In no event will $tcpp_bizname, or its suppliers or licensors, be liable with respect to any subject matter of this agreement under any contract, negligence, strict liability or other legal or equitable theory for: (i) any special, incidental or consequential damages; (ii) the cost of procurement for substitute products or services; (iii) for interruption of use or loss or corruption of data; or (iv) for any amounts that exceed the fees paid by you to $tcpp_bizname under this agreement during the $tcpp_timeperiodfordeterminingmaximumdamages period prior to the cause of action. $tcpp_bizname shall have no liability for any failure or delay due to matters beyond their reasonable control. The foregoing shall not apply to the extent prohibited by applicable law.</li>
+<li class='important'><strong>Disclaimer of Warranties.</strong> The Website is provided &quot;as is&quot;. $tcpp_bizname and its suppliers and licensors hereby disclaim all warranties of any kind, express or implied, including, without limitation, the warranties of merchantability, fitness for a particular purpose and non-infringement. Neither $tcpp_bizname nor its suppliers and licensors, makes any warranty that the Website will be error free or that access thereto will be continuous or uninterrupted. You understand that you download from, or otherwise obtain content or services through, the Website at your own discretion and risk.</li>
+<li class='important'><strong>Limitation of Liability.</strong> In no event will $tcpp_bizname, or its suppliers or licensors, be liable with respect to any subject matter of this agreement under any contract, negligence, strict liability or other legal or equitable theory for: (i) any special, incidental or consequential damages; (ii) the cost of procurement for substitute products or services; (iii) for interruption of use or loss or corruption of data; or (iv) for any amounts that exceed the fees paid by you to $tcpp_bizname under this agreement during the $tcpp_timeperiodfordeterminingmaximumdamages period prior to the cause of action. $tcpp_bizname shall have no liability for any failure or delay due to matters beyond their reasonable control. The foregoing shall not apply to the extent prohibited by applicable law.</li>
 <li><strong>General Representation and Warranty.</strong> You represent and warrant that (i) your use of the Website will be in strict accordance with the $tcpp_bizname $tcpp_privacypolicyheading, with this Agreement and with all applicable laws and regulations (including without limitation any local laws or regulations in your country, state, city, or other governmental area, regarding online conduct and acceptable content, and including all applicable laws regarding the transmission of technical data exported from the United States or the country in which you reside) and (ii) your use of the Website will not infringe or misappropriate the intellectual property rights of any third party.</li>
 <li><strong>Indemnification.</strong> You agree to indemnify and hold harmless $tcpp_bizname, its contractors, and its licensors, and their respective directors, officers, employees and agents from and against any and all claims and expenses, including attorneys' fees, arising out of your use of the Website, including but not limited to your violation of this Agreement.</li>
 <li><strong>Miscellaneous.</strong> This Agreement constitutes the entire agreement between $tcpp_bizname and you concerning the subject matter hereof, and they may only be modified by a written amendment signed by an authorized executive of $tcpp_bizname, or by the posting by $tcpp_bizname of a revised version. Except to the extent applicable law, if any, provides otherwise, this Agreement, any access to or use of the Website will be governed by the laws of the $tcpp_venue, excluding its conflict of law provisions, and the proper venue for any disputes arising out of or relating to any of the same will be the state and federal courts located in $tcpp_courtlocation. Except for claims for injunctive or equitable relief or claims regarding intellectual property rights (which may be brought in any competent court without the posting of a bond), any dispute arising under this Agreement shall be finally settled in accordance with the Comprehensive Arbitration Rules of the Judicial Arbitration and Mediation Service, Inc. (&quot;JAMS&quot;) by three arbitrators appointed in accordance with such Rules. The arbitration shall take place in $tcpp_arbitrationlocation, in the English language and the arbitral decision may be enforced in any court. The prevailing party in any action or proceeding to enforce this Agreement shall be entitled to costs and attorneys' fees. If any part of this Agreement is held invalid or unenforceable, that part will be construed to reflect the parties' original intent, and the remaining portions will remain in full force and effect. A waiver by either party of any term or condition of this Agreement or any breach thereof, in any one instance, will not waive such term or condition or any subsequent breach thereof. You may assign your rights under this Agreement to any party that consents to, and agrees to be bound by, its terms and conditions; $tcpp_bizname may assign its rights under this Agreement without condition. This Agreement will be binding upon and will inure to the benefit of the parties, their successors and permitted assigns.</li>
 </ol>";
 
-$tcpp_privacypolicy = "<h3 class='auto-tos-pp ppheading'>$tcpp_privacypolicyheading:</h3>
-<p><a class='auto-tos-pp' href='#atospp'>Back to top</a></p>
+$tcpp_privacypolicy = "<h3 id='atospp-privacy' class='auto-tos-pp ppheading'>$tcpp_privacypolicyheading:</h3>
+<p><a class='auto-tos-pp' href='#atospp-toc'>Back to top</a></p>
 <p>$tcpp_biznamefull (&quot;<strong>$tcpp_bizname</strong>&quot;) operates $tcpp_domainname and may operate other websites. It is $tcpp_biznamepossessive policy to respect your privacy regarding any information we may collect while operating our websites.</p>
 <h3>Website Visitors</h3>
 <p>Like most website operators, $tcpp_bizname collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. $tcpp_biznamepossessive purpose in collecting non-personally identifying information is to better understand how $tcpp_biznamepossessive visitors use its website. From time to time, $tcpp_bizname may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website.</p>
@@ -452,18 +452,16 @@ $tcpp_privacypolicy = "<h3 class='auto-tos-pp ppheading'>$tcpp_privacypolicyhead
 <p>Although most changes are likely to be minor, $tcpp_bizname may change its $tcpp_privacypolicyheading from time to time, and in $tcpp_biznamepossessive sole discretion. $tcpp_bizname encourages visitors to frequently check this page for any changes to its $tcpp_privacypolicyheading. If you have a $tcpp_domainname account, you might also receive an alert informing you of these changes. Your continued use of this site after any change in this $tcpp_privacypolicyheading will constitute your acceptance of such change.</p>";
 
 
-$tcpp_combinedtermsandprivacy = "<a name='atospp'></a><h3 class='auto-tos-pp tospptocheading'>Contents:</h3>
+$tcpp_combinedtermsandprivacy = "<h3 id='atospp-toc' class='auto-tos-pp tospptocheading'>Contents:</h3>
 <ol class='auto-tos-pp tospptoc'>
-	<li><a href=#terms>$tcpp_termsheading</a></li>
-	<li><a href=#privacy>$tcpp_privacypolicyheading</a></li>
+	<li><a href='#atospp-terms'>$tcpp_termsheading</a></li>
+	<li><a href='#atospp-privacy'>$tcpp_privacypolicyheading</a></li>
 </ol>
-<a name=\"terms\"></a>
 
-<hr class='auto-tos-pp tosppbeforetos' />
+<hr class='auto-tos-pp tosppbeforetos'>
 $tcpp_tcond
-<a name=\"privacy\"></a>
 
-<hr class='auto-tos-pp tosppbeforepp' />
+<hr class='auto-tos-pp tosppbeforepp'>
 $tcpp_privacypolicy";
 
 
@@ -474,8 +472,8 @@ $tcpp_privacypolicy";
     if(!empty($tcpp_combinedtermsandprivacy) && $tcpp_publish == 'atospp_on')
 		{ $a .= $tcpp_combinedtermsandprivacy; }
 	elseif( current_user_can('edit_plugins') ) {
-		$a .= "Terms and Privacy Policy are coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br/>"; }
-	else { $a .= "Terms and Privacy Policy are coming soon.<br/>"; }
+		$a .= "Terms and Privacy Policy are coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br>"; }
+	else { $a .= "Terms and Privacy Policy are coming soon.<br>"; }
 
 	return $a;
 }
@@ -543,7 +541,7 @@ function my_terms_of_service_func() {
 
 
 
-$tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
+$tcpp_tcond = "<h3 id='atospp-terms' class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
 <p>The following terms and conditions govern all use of the $tcpp_domainname website and all content, services and products available at or through the website (taken together, the Website). The Website is owned and operated by $tcpp_biznamefull (&quot;$tcpp_bizname&quot;). The Website is offered subject to your acceptance without modification of all of the terms and conditions contained herein and all other operating rules, policies (including, without limitation, $tcpp_biznamepossessive $tcpp_privacypolicyheading) and procedures that may be published from time to time on this Site by $tcpp_bizname (collectively, the &quot;Agreement&quot;).</p>
 <p>Please read this Agreement carefully before accessing or using the Website. By accessing or using any part of the web site, you agree to become bound by the terms and conditions of this agreement. If you do not agree to all the terms and conditions of this agreement, then you may not access the Website or use any services. If these terms and conditions are considered an offer by $tcpp_bizname, acceptance is expressly limited to these terms. The Website is available only to individuals who are at least $tcpp_minimumage years old.</p>
 <ol>
@@ -554,7 +552,7 @@ $tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
 <li>if your employer has rights to intellectual property you create, you have either (i) received permission from your employer to post or make available the Content, including but not limited to any software, or (ii) secured from your employer a waiver as to all rights in or to the Content;</li>
 <li>you have fully complied with any third-party licenses relating to the Content, and have done all things necessary to successfully pass through to end users any required terms;</li>
 <li>the Content does not contain or install any viruses, worms, malware, Trojan horses or other harmful or destructive content;</li>
-<li class=&quot;important&quot;>the Content is not spam, is not machine- or randomly-generated, and does not contain unethical or unwanted commercial content designed to drive traffic to third party sites or boost the search engine rankings of third party sites, or to further unlawful acts (such as phishing) or mislead recipients as to the source of the material (such as spoofing);</li>
+<li class='important'>the Content is not spam, is not machine- or randomly-generated, and does not contain unethical or unwanted commercial content designed to drive traffic to third party sites or boost the search engine rankings of third party sites, or to further unlawful acts (such as phishing) or mislead recipients as to the source of the material (such as spoofing);</li>
 <li>the Content is not pornographic, does not contain threats or incite violence towards individuals or entities, and does not violate the privacy or publicity rights of any third party;</li>
 <li>your blog is not getting advertised via unwanted electronic messages such as spam links on newsgroups, email lists, other blogs and web sites, and similar unsolicited promotional methods;</li>
 <li>your blog is not named in a manner that misleads your readers into thinking that you are another person or company. For example, your blog's URL or name is not the name of a person other than yourself or company other than your own; and</li>
@@ -564,9 +562,9 @@ $tcpp_tcond = "<h3 class='auto-tos-pp tosheading'>$tcpp_termsheading:</h3>
 <p>Without limiting any of those representations or warranties, $tcpp_bizname has the right (though not the obligation) to, in $tcpp_biznamepossessive sole discretion (i) refuse or remove any content that, in $tcpp_biznamepossessive reasonable opinion, violates any $tcpp_bizname policy or is in any way harmful or objectionable, or (ii) terminate or deny access to and use of the Website to any individual or entity for any reason, in $tcpp_biznamepossessive sole discretion. $tcpp_bizname will have no obligation to provide a refund of any amounts previously paid.</li>
 <li><strong>Payment and Renewal.</strong>
 <ul>
-<li><strong>General Terms.</strong><br />
+<li><strong>General Terms.</strong><br>
   By selecting a product or service, you agree to pay $tcpp_bizname the one-time and/or monthly or annual subscription fees indicated  (additional payment terms may be included in other communications). Subscription payments will be charged on a pre-pay basis on the day you sign up for an Upgrade and will cover the use of that service for a monthly or annual subscription period as indicated. Payments are not refundable.</li>
-<li><strong>Automatic Renewal. </strong><br />
+<li><strong>Automatic Renewal. </strong><br>
 Unless you notify $tcpp_bizname before the end of the applicable subscription period that you want to cancel a subscription, your  subscription will automatically renew and you authorize us to collect the then-applicable annual or monthly subscription fee for such subscription (as well as any taxes) using any credit card or other payment mechanism we have on record for you. Upgrades can be canceled at any time by submitting your request to $tcpp_bizname in writing.</li>
 </ul>
 </li>
@@ -583,12 +581,12 @@ Unless you notify $tcpp_bizname before the end of the applicable subscription pe
 <li><strong>Attribution.</strong> $tcpp_bizname reserves the right to display attribution links such as 'Blog at $tcpp_domainname,' theme author, and font attribution in your blog footer or toolbar.</li>
 <li><strong>Partner Products.</strong> By activating a partner product (e.g. theme) from one of our partners, you agree to that partner's terms of service. You can opt out of their terms of service at any time by de-activating the partner product.</li>
 <li><strong>Domain Names.</strong> If you are registering a domain name, using or transferring a previously registered domain name, you acknowledge and agree that use of the domain name is also subject to the policies of the Internet Corporation for Assigned Names and Numbers (&quot;ICANN&quot;), including their <a href=\"http://www.icann.org/en/registrars/registrant-rights-responsibilities-en.htm\">Registration Rights and Responsibilities</a>.</li>
-<li><strong>Changes. </strong>$tcpp_bizname reserves the right, at its sole discretion, to modify or replace any part of this Agreement. It is your responsibility to check this Agreement periodically for changes. Your continued use of or access to the Website following the posting of any changes to this Agreement constitutes acceptance of those changes. $tcpp_bizname may also, in the future, offer new services and/or features through the Website (including, the release of new tools and resources). Such new features and/or services shall be subject to the terms and conditions of this Agreement. <strong><br />
+<li><strong>Changes. </strong>$tcpp_bizname reserves the right, at its sole discretion, to modify or replace any part of this Agreement. It is your responsibility to check this Agreement periodically for changes. Your continued use of or access to the Website following the posting of any changes to this Agreement constitutes acceptance of those changes. $tcpp_bizname may also, in the future, offer new services and/or features through the Website (including, the release of new tools and resources). Such new features and/or services shall be subject to the terms and conditions of this Agreement. <strong><br>
 </strong></li>
-<li><strong>Termination. </strong>$tcpp_bizname may terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately. If you wish to terminate this Agreement or your $tcpp_domainname account (if you have one), you may simply discontinue using the Website. Notwithstanding the foregoing, if you have a paid services account, such account can only be terminated by $tcpp_bizname if you materially breach this Agreement and fail to cure such breach within $tcpp_timeperiodforchangingfeesandfornotifications from $tcpp_biznamepossessive notice to you thereof; provided that, $tcpp_bizname can terminate the Website immediately as part of a general shut down of our service. All provisions of this Agreement which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability. <strong><br />
+<li><strong>Termination. </strong>$tcpp_bizname may terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately. If you wish to terminate this Agreement or your $tcpp_domainname account (if you have one), you may simply discontinue using the Website. Notwithstanding the foregoing, if you have a paid services account, such account can only be terminated by $tcpp_bizname if you materially breach this Agreement and fail to cure such breach within $tcpp_timeperiodforchangingfeesandfornotifications from $tcpp_biznamepossessive notice to you thereof; provided that, $tcpp_bizname can terminate the Website immediately as part of a general shut down of our service. All provisions of this Agreement which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability. <strong><br>
 </strong></li>
-<li class=&quot;important&quot;><strong>Disclaimer of Warranties.</strong> The Website is provided &quot;as is&quot;. $tcpp_bizname and its suppliers and licensors hereby disclaim all warranties of any kind, express or implied, including, without limitation, the warranties of merchantability, fitness for a particular purpose and non-infringement. Neither $tcpp_bizname nor its suppliers and licensors, makes any warranty that the Website will be error free or that access thereto will be continuous or uninterrupted. You understand that you download from, or otherwise obtain content or services through, the Website at your own discretion and risk.</li>
-<li class=&quot;important&quot;><strong>Limitation of Liability.</strong> In no event will $tcpp_bizname, or its suppliers or licensors, be liable with respect to any subject matter of this agreement under any contract, negligence, strict liability or other legal or equitable theory for: (i) any special, incidental or consequential damages; (ii) the cost of procurement for substitute products or services; (iii) for interruption of use or loss or corruption of data; or (iv) for any amounts that exceed the fees paid by you to $tcpp_bizname under this agreement during the $tcpp_timeperiodfordeterminingmaximumdamages period prior to the cause of action. $tcpp_bizname shall have no liability for any failure or delay due to matters beyond their reasonable control. The foregoing shall not apply to the extent prohibited by applicable law.</li>
+<li class='important'><strong>Disclaimer of Warranties.</strong> The Website is provided &quot;as is&quot;. $tcpp_bizname and its suppliers and licensors hereby disclaim all warranties of any kind, express or implied, including, without limitation, the warranties of merchantability, fitness for a particular purpose and non-infringement. Neither $tcpp_bizname nor its suppliers and licensors, makes any warranty that the Website will be error free or that access thereto will be continuous or uninterrupted. You understand that you download from, or otherwise obtain content or services through, the Website at your own discretion and risk.</li>
+<li class='important'><strong>Limitation of Liability.</strong> In no event will $tcpp_bizname, or its suppliers or licensors, be liable with respect to any subject matter of this agreement under any contract, negligence, strict liability or other legal or equitable theory for: (i) any special, incidental or consequential damages; (ii) the cost of procurement for substitute products or services; (iii) for interruption of use or loss or corruption of data; or (iv) for any amounts that exceed the fees paid by you to $tcpp_bizname under this agreement during the $tcpp_timeperiodfordeterminingmaximumdamages period prior to the cause of action. $tcpp_bizname shall have no liability for any failure or delay due to matters beyond their reasonable control. The foregoing shall not apply to the extent prohibited by applicable law.</li>
 <li><strong>General Representation and Warranty.</strong> You represent and warrant that (i) your use of the Website will be in strict accordance with the $tcpp_bizname $tcpp_privacypolicyheading, with this Agreement and with all applicable laws and regulations (including without limitation any local laws or regulations in your country, state, city, or other governmental area, regarding online conduct and acceptable content, and including all applicable laws regarding the transmission of technical data exported from the United States or the country in which you reside) and (ii) your use of the Website will not infringe or misappropriate the intellectual property rights of any third party.</li>
 <li><strong>Indemnification.</strong> You agree to indemnify and hold harmless $tcpp_bizname, its contractors, and its licensors, and their respective directors, officers, employees and agents from and against any and all claims and expenses, including attorneys' fees, arising out of your use of the Website, including but not limited to your violation of this Agreement.</li>
 <li><strong>Miscellaneous.</strong> This Agreement constitutes the entire agreement between $tcpp_bizname and you concerning the subject matter hereof, and they may only be modified by a written amendment signed by an authorized executive of $tcpp_bizname, or by the posting by $tcpp_bizname of a revised version. Except to the extent applicable law, if any, provides otherwise, this Agreement, any access to or use of the Website will be governed by the laws of the $tcpp_venue, excluding its conflict of law provisions, and the proper venue for any disputes arising out of or relating to any of the same will be the state and federal courts located in $tcpp_courtlocation. Except for claims for injunctive or equitable relief or claims regarding intellectual property rights (which may be brought in any competent court without the posting of a bond), any dispute arising under this Agreement shall be finally settled in accordance with the Comprehensive Arbitration Rules of the Judicial Arbitration and Mediation Service, Inc. (&quot;JAMS&quot;) by three arbitrators appointed in accordance with such Rules. The arbitration shall take place in $tcpp_arbitrationlocation, in the English language and the arbitral decision may be enforced in any court. The prevailing party in any action or proceeding to enforce this Agreement shall be entitled to costs and attorneys' fees. If any part of this Agreement is held invalid or unenforceable, that part will be construed to reflect the parties' original intent, and the remaining portions will remain in full force and effect. A waiver by either party of any term or condition of this Agreement or any breach thereof, in any one instance, will not waive such term or condition or any subsequent breach thereof. You may assign your rights under this Agreement to any party that consents to, and agrees to be bound by, its terms and conditions; $tcpp_bizname may assign its rights under this Agreement without condition. This Agreement will be binding upon and will inure to the benefit of the parties, their successors and permitted assigns.</li>
@@ -603,8 +601,8 @@ Unless you notify $tcpp_bizname before the end of the applicable subscription pe
     if(!empty($tcpp_tcond) && $tcpp_publish == 'atospp_on')
 		{ $b .= $tcpp_tcond; }
 	elseif( current_user_can('edit_plugins') ) {
-		$b .= "Terms are coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br/>"; }
-	  else { $b .= "Terms are coming soon.<br/>"; }
+		$b .= "Terms are coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br>"; }
+	  else { $b .= "Terms are coming soon.<br>"; }
 
 	return $b;
 }
@@ -667,7 +665,7 @@ function my_privacy_policy_func() {
 
 
 
-$tcpp_privacypolicy = "<h3 class='auto-tos-pp ppheading'>$tcpp_privacypolicyheading:</h3>
+$tcpp_privacypolicy = "<h3 id='atospp-privacy' class='auto-tos-pp ppheading'>$tcpp_privacypolicyheading:</h3>
 <p>$tcpp_biznamefull (&quot;<strong>$tcpp_bizname</strong>&quot;) operates $tcpp_domainname and may operate other websites. It is $tcpp_biznamepossessive policy to respect your privacy regarding any information we may collect while operating our websites.</p>
 <h3>Website Visitors</h3>
 <p>Like most website operators, $tcpp_bizname collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. $tcpp_biznamepossessive purpose in collecting non-personally identifying information is to better understand how $tcpp_biznamepossessive visitors use its website. From time to time, $tcpp_bizname may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website.</p>
@@ -696,8 +694,8 @@ $tcpp_privacypolicy = "<h3 class='auto-tos-pp ppheading'>$tcpp_privacypolicyhead
 	if(!empty($tcpp_privacypolicy) && $tcpp_publish == 'atospp_on')
 		{ $c .= $tcpp_privacypolicy; }
 	elseif( current_user_can('edit_plugins') ) {
-		$c .= "Privacy Policy is coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br />"; }
-	else { $c .= "Privacy Policy is coming soon.<br />"; }
+		$c .= "Privacy Policy is coming soon. <a href='$settingspage'>Configure this plugin's settings.</a><br>"; }
+	else { $c .= "Privacy Policy is coming soon.<br>"; }
 
 	return $c;
 }

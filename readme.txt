@@ -1,7 +1,7 @@
 === Auto Terms of Service and Privacy Policy ===
 Contributors: cliffpaulick
 Tags: AdSense privacy policy, AdWords privacy policy, agreement, business, conditions, Digital Millennium Copyright Act, disclaimer, DMCA, documents, Facebook privacy policy, FB privacy policy, Google, law, lawyer, legal, policy, privacy, privacy policy, refund, SEM, SEO, SMM, statement, t&c, terms, terms and conditions, terms of use, visitor tracking policy
-Requires at least: 3.0
+Requires at least: 3.1
 Tested up to: 4.2
 Stable tag: /trunk/
 License: GPLv2 or later
@@ -13,7 +13,14 @@ Put your own details into a modified version of Automattic's "Terms of Service" 
 
 Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others.
 
-<strong>Enter your organization's information in the plugin's settings page. Then you can add your own page and use one of the 3 available shortcodes: [my_terms_of_service_and_privacy_policy], [my_terms_of_service], and/or [my_privacy_policy]
+<strong>Enter your organization's information in the plugin's settings page. Then you can add your own page and use one of the 3 available shortcodes: *[my_terms_of_service_and_privacy_policy]*, *[my_terms_of_service]*, and/or *[my_privacy_policy]*
+
+== Highlights ==
+* Quick and easy setup in *wp-admin -> Settings -> Auto TOS & PP*
+* No WP_DEBUG messages
+* Valid HTML 4 and HTML 5 shortcode output
+* Just 3 simple shortcodes
+
 
 Disclaimer: <a href="http://tourkick.com/">Clifford Paulick of TourKick.com</a> is not an attorney. Additional disclaimer text within the plugin file(s).
 
@@ -68,6 +75,9 @@ One of these <a href="https://wordpress.org/plugins/tags/to-top/" target="_blank
 == Changelog ==
 * WARNING: All direct plugin file edits (required in versions prior to v1.4) will be lost and will need to be entered via the plugin's settings page. Make sure you backup your information BEFORE UPDATING to a new version.
 * Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+= Version 1.5 =
+* April 26, 2015
+* Shortcode output is now valid for both HTML 4.01 Strict and HTML 5. Changed anchor links from 'a name' to 'h3 id' to validate as HTML 5.
 = Version 1.4.4 =
 * April 20, 2015
 * WordPress compatibility version bump. Tested with WP version 4.2-RC1-32175.

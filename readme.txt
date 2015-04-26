@@ -1,6 +1,6 @@
 === Auto Terms of Service and Privacy Policy ===
 Contributors: cliffpaulick
-Tags: AdSense privacy policy, AdWords privacy policy, agreement, business, conditions, Digital Millennium Copyright Act, disclaimer, DMCA, documents, Facebook privacy policy, FB privacy policy, Google, law, lawyer, legal, policy, privacy, privacy policy, refund, SEM, SEO, SMM, statement, t&c, terms, terms and conditions, terms of use, visitor tracking policy
+Tags: AdSense privacy policy, AdWords privacy policy, agreement, business, conditions, Digital Millennium Copyright Act, disclaimer, DMCA, documents, Facebook privacy policy, FB privacy policy, Google, HTML5, law, lawyer, legal, policy, privacy, privacy policy, refund, SEM, SEO, SMM, statement, t&c, terms, terms and conditions, terms of use, visitor tracking policy
 Requires at least: 3.1
 Tested up to: 4.2
 Stable tag: /trunk/
@@ -15,7 +15,7 @@ Puts your own information into a version of Automattic's <a href="http://en.word
 
 <strong>Enter your organization's information in the plugin's settings page. Then you can add your own page and use one of the 3 available shortcodes: *[my_terms_of_service_and_privacy_policy]*, *[my_terms_of_service]*, and/or *[my_privacy_policy]*
 
-=Highlights=
+Highlights
 * Quick and easy setup in *wp-admin -> Settings -> Auto TOS & PP*
 * Just 3 simple shortcodes
 * No WP_DEBUG messages

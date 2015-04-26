@@ -13,9 +13,9 @@ Put your own details into a modified version of Automattic's "Terms of Service" 
 
 Puts your own information into a version of Automattic's <a href="http://en.wordpress.com/tos/">Terms of Service</a> and <a href="http://automattic.com/privacy/">Privacy Policy</a>, both available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Sharealike</a> license, that have been modified to exclude specifics to Automattic (like mentions of "JetPack", "WordPress.com", and "VIP") and have more generic language that can apply to most any site or service provider, including single sites, subscription sites, blog networks, and others.
 
-<strong>Enter your organization's information in the plugin's settings page. Then you can add your own page and use one of the 3 available shortcodes: *[my_terms_of_service_and_privacy_policy]*, *[my_terms_of_service]*, and/or *[my_privacy_policy]*
+<strong>Enter your organization's information in the plugin's settings page. Then you can add your own page and use one of the 3 available shortcodes: *[my_terms_of_service_and_privacy_policy]*, *[my_terms_of_service]*, and/or *[my_privacy_policy]*</strong>
 
-Highlights
+= Highlights =
 * Quick and easy setup in *wp-admin -> Settings -> Auto TOS & PP*
 * Just 3 simple shortcodes
 * No WP_DEBUG messages

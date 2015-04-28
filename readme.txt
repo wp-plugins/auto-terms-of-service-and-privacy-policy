@@ -1,8 +1,8 @@
 === Auto Terms of Service and Privacy Policy ===
 Contributors: cliffpaulick
-Tags: AdSense privacy policy, AdWords privacy policy, agreement, business, conditions, Digital Millennium Copyright Act, disclaimer, DMCA, documents, Facebook privacy policy, FB privacy policy, Google, HTML5, law, lawyer, legal, policy, privacy, privacy policy, refund, SEM, SEO, SMM, statement, t&c, terms, terms and conditions, terms of use, visitor tracking policy
+Tags: AdSense privacy policy, AdWords privacy policy, agreement, business, conditions, Digital Millennium Copyright Act, disclaimer, DMCA, documents, Facebook privacy policy, FB privacy policy, Google, HTML5, law, lawyer, legal, policy, privacy, privacy policy, refund, SEM, SEO, SMM, statement, T&C, terms, terms and conditions, terms of use, visitor tracking policy
 Requires at least: 3.1
-Tested up to: 4.2
+Tested up to: 4.3
 Stable tag: /trunk/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,7 @@ Puts your own information into a version of Automattic's <a href="http://en.word
 * Quick and easy setup in *wp-admin -> Settings -> Auto TOS & PP*
 * Just 3 simple shortcodes
 * No WP_DEBUG messages
-* Valid HTML 4 and HTML 5 shortcode output
+* Shortcode output is valid HTML 4.01 Strict and HTML 5 Experimental
 * Responsive plugin developer
 
 Disclaimer: <a href="http://tourkick.com/">Clifford Paulick of TourKick.com</a> is not an attorney. Additional disclaimer text within the plugin file(s).
@@ -73,8 +73,18 @@ One of these <a href="https://wordpress.org/plugins/tags/to-top/" target="_blank
 
 9. Scroll or Click to Privacy Policy when using [my_terms_of_service_and_privacy_policy] shortcode, further down the same page as the previous screenshot. Separated by horizontal line with class of "auto-tos-pp".
 == Changelog ==
-* WARNING: All direct plugin file edits (required in versions prior to v1.4) will be lost and will need to be entered via the plugin's settings page. Make sure you backup your information BEFORE UPDATING to a new version.
 * Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+= Version 1.6 =
+* April 27, 2015
+* Added filters: before and after TOS heading and PP heading; end of TOS and end of PP. Allows you to add custom text via Child Theme functions.php or a Functionality Plugin.
+* Refactored code (more OOP / use of functions).
+* Moved 'Back To Top' links to end of TOS and PP instead of immediately after each heading.
+* Changed TOS and PP main headings from 'h3' to 'h2'.
+* Replaced 'hr' with formatted 'div'. Override color and height of 1px black line by adding more specific CSS. For example, div.auto-tos-pp-separator{ border-bottom-color: green !important; border-bottom-width: 10px !important; }
+* Added HTML comment with plugin version number and which shortcode is used to assist with potential support requests.
+* Added protection from calling plugin PHP file directly.
+* WordPress compatibility version bump. Tested with WordPress version 4.3-alpha-32297
+* Added 'Upgrade Notice' section to plugin description.
 = Version 1.5 =
 * April 26, 2015
 * Shortcode output is now valid for both HTML 4.01 Strict and HTML 5. Changed anchor links from 'a name' to 'h3 id' to validate as HTML 5.
@@ -109,3 +119,5 @@ One of these <a href="https://wordpress.org/plugins/tags/to-top/" target="_blank
 * Fixed link anchor text to use the name specified in the settings, to fix the issue of displaying hard coded "Terms of Use" and "Privacy Policy" anchor text in the table of contents for the [my_terms_of_service_and_privacy_policy] shortcode.
 = Version: 1.0.2012.09.12 =
 * Initial release.
+== Upgrade Notice ==
+* WARNING: All direct plugin file edits (required in versions prior to v1.4) will be lost and will need to be entered via the plugin's settings page. Make sure you backup your information BEFORE UPDATING to a new version.

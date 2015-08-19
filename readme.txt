@@ -74,6 +74,9 @@ One of these <a href="https://wordpress.org/plugins/tags/to-top/" target="_blank
 9. Scroll or Click to Privacy Policy when using [my_terms_of_service_and_privacy_policy] shortcode, further down the same page as the previous screenshot. Separated by horizontal line with class of "auto-tos-pp".
 == Changelog ==
 * Changelog DIFFs for all versions are available at <a href="http://plugins.trac.wordpress.org/browser/auto-terms-of-service-and-privacy-policy/trunk" target="_blank">WordPress SVN</a>.
+* August 19, 2015
+* Tested with WP 4.3
+* Added icon.svg asset
 = Version 1.6 =
 * April 27, 2015
 * Added filters: before and after TOS heading and PP heading; end of TOS and end of PP. Allows you to add custom text via Child Theme functions.php or a Functionality Plugin.
